@@ -10,7 +10,6 @@ class Field:
 
 
 class Name(Field):
-    # Можна залишити як є, базової логіки Field достатньо
     pass
 
 
@@ -34,11 +33,11 @@ class Record:
         self.phones = []
 
     def add_phone(self, phone):
-        """Додати новий телефон до контакту."""
+        #Додати новий телефон до контакту.
         self.phones.append(Phone(phone))
 
     def remove_phone(self, phone):
-        """Видалити телефон зі списку. Повертає True/False."""
+        #Видалити телефон зі списку. Повертає True/False.
         for p in self.phones:
             if p.value == phone:
                 self.phones.remove(p)
@@ -46,18 +45,18 @@ class Record:
         return False
 
     def edit_phone(self, old_phone, new_phone):
-        """Змінити існуючий телефон на новий (з валідацією)."""
+        #Змінити існуючий телефон на новий.
         for p in self.phones:
             if p.value == old_phone:
                 # перевірка нового номера
                 p._validate(new_phone)
                 p.value = new_phone
                 return True
-        # Якщо за завданням хочеться мʼякше – можна замість raise повернути False
+        #Якщо за завданням хочеться мʼякше – можна замість raise повернути False
         raise ValueError("Phone to edit not found")
 
     def find_phone(self, phone):
-        """Повертає обʼєкт Phone або None."""
+        #Повертає обʼєкт Phone або None.
         for p in self.phones:
             if p.value == phone:
                 return p
@@ -70,14 +69,14 @@ class Record:
 
 class AddressBook(UserDict):
     def add_record(self, record):
-        """Додати Record до книги. Ключ — імʼя (рядок)."""
+        #Додати Record до книги. Ключ — імʼя (рядок).
         self.data[record.name.value] = record
 
     def find(self, name):
-        """Знайти Record за імʼям. Повертає Record або None."""
+        #Знайти Record за імʼям. Повертає Record або None.
         return self.data.get(name)
 
     def delete(self, name):
-        """Видалити Record за імʼям."""
+        #Видалити Record за імʼям.
         if name in self.data:
             del self.data[name]
